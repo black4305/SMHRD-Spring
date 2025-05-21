@@ -1,0 +1,15 @@
+package com.smhrd.model;
+
+import java.sql.Date;
+
+public class BoardVO {
+	// 하나의 자료형으로 묶어주기 위해 만드는 나만의 자료형
+	// 게시글 데이터 1개를 표현가능한 자료형
+	
+	// 1. Field : 게시글 번호, 제목, 작성자 이름, 내용, 작성일
+	private int boardNum;
+	private String title;
+	private String name;
+	private String content;
+	private Date date;
+}
