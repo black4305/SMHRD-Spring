@@ -10,17 +10,26 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- 1. Front Controller(Dispatcher Servlet)이 controller를 찾을 수 있게끔
+	 		컨트롤러 어노테이션을 사용할수있게 만드는 태그!
+	  -->
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- resources 폴더 : 정적인 파일을 저장하는 폴더(css,html,js,img등)의 경로를 
+	                     명시하는 태그 -->
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- viewname을 리턴하는데 페이지 이동가능한 이유 : viewResolver
+			@Controller태그가 붙어있는 클래스 내부에서 되돌려주는 값을 기준으로 주소값 변환해주는 객체
+			접두사, 접미사 설정되어있다.
+	 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+	<!-- Controller 파일을 찾기위해 package scan 지정 -->
 	<context:component-scan base-package="com.smhrd.web" />
 	
 	

@@ -4,16 +4,26 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<!-- web.xml : was가 구동될때, 웹 프로젝트에 대한 전반적인 설정을 잡아주는 파일 
+		 Spring MVC Project에서 web.xml의 역할
+		 : Spring Container(Spring이 스스로 생성,관리해야하는 객체를 만드는 파일)에 만들어
+		   져야하는 내용들을 기술하는 공간!
+		   -> Spring Container에서 자동으로 만들어야하는 것들 서술하는 곳!!
+	-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/spring/root-context.xml</param-value>
 	</context-param>
-	
+	<!-- listener : 특정 이벤트에 맞춰 실행되는 클래스
+		ContextLoaderListener가 Spring Container생성
+		web application이 로딩 될때, webApplicationContext(Bean설정 파일을 사용해서
+		웹 애플리케이션에서 사용할 객체 관리) 생성
+	  -->
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	<!-- Dispatcher Servlet설정되는 코드 : 모든 요청을 받는 D/S -->
 	<!-- Processes application requests -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
@@ -29,5 +39,23 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	<!-- post방식일때 한글 인코딩 설정하는 태그! -->
+   <filter>
+      <filter-name>encodingFilter</filter-name>
+      <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+      <init-param>
+         <param-name>encoding</param-name>
+         <param-value>UTF-8</param-value>
+      </init-param>
+      <init-param>
+         <param-name>forceEncoding</param-name>
+         <param-value>true</param-value>
+      </init-param>
+   </filter>
+   <filter-mapping>
+      <filter-name>encodingFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+   </filter-mapping>
 
 </web-app>
