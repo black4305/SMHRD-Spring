@@ -25,9 +25,34 @@ public class BoardController {
 	// 기능 단위로 메서드 작성!!
 	// @RequestMapping ()안에 작성된 url로 요청시,
 	//  -> 아래의 메서드 실행
+
+	@RequestMapping("/boardDelete")
+	public String boardDelete(@RequestParam int idx, Model model) {
+
+		// 인터페이스 mapper의 boardDelete 메서드를 활용해서 DB에 접근하여 게시글 삭제 쿼리 실행
+		mapper.boardDelete(idx);
+
+		// return viewName 하면 board.jsp로 단순 이동
+		// board.jsp + 전체 게시글 조회한 데이터가 모델에 담기는 로직 --> /boardlist로 url 요청 필요!
+		return "redirect:/boardlist";
+	}
+
 	@GetMapping("boardSelect")
-	public String boardSelect(@RequestParam int idx) {
-		return "";
+	public String boardSelect(@RequestParam int idx, Model model) {
+
+		// 1. DB에서 수집한 데이터 idx와 동일한 idx를 가진 게시글 1개 조회
+		BoardVO vo = mapper.boardSelect(idx);
+
+		// 2. 조회한 게시글 정보를 model에 담아주기
+		model.addAttribute("vo", vo);
+
+		// scope : 데이터가 유효한 범위 -> 정해진 범위 내에서만 사용 가능!
+		// scope 종류 : application > session > request > page
+		// page scope : 실제 선언된 JSP 페이지 내에서만 사용 가능
+		// request scope : 클라이언트로부터 요청을 받고 응답할 때까지 사용 가능
+		// session scope : 세션이 유지되는 동안 사용 가능
+		// application scope : 웹 어플리케이션(server)이 시작되고 종료될 때까지 사용 가능
+		return "boardSelect";
 	}
 	
 	// 글쓰기 버튼 클릭 -> register.jsp 이동하기 위한 매핑
@@ -65,5 +90,4 @@ public class BoardController {
 		return "Board";
 		// Web-inf/views/Board.jsp --> viewResolver
 	}
-	
 }

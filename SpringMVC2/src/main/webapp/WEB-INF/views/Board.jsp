@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="cpath" value="${pageContext.request.contextPath}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,12 +55,5 @@
 			<div class="panel-footer">클라우드기반 인공지능 서비스 엔지니어과정</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
 </body>
 </html>

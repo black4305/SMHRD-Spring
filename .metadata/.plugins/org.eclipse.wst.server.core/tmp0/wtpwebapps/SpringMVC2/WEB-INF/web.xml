@@ -16,7 +16,7 @@
 	</context-param>
 	<!-- listener : 특정 이벤트에 맞춰 실행되는 클래스
 		ContextLoaderListener가 Spring Container생성
-		web application이 로딩 될때, webApplicationContext(Bean설정 파일을 사용해서 
+		web application이 로딩 될때, webApplicationContext(Bean설정 파일을 사용해서
 		웹 애플리케이션에서 사용할 객체 관리) 생성
 	  -->
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
