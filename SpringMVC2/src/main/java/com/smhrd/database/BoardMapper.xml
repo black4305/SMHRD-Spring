@@ -8,9 +8,9 @@
 		INSERT INTO BOARD(TITLE, WRITER, CONTENT)
 		VALUES(#{title}, #{writer}, #{content})
 	</insert>
-
-
-
-
-
+	<update id="boardUpdate" parameterType="com.smhrd.model.BoardVO">
+		UPDATE BOARD 
+		SET TITLE = #{title}, CONTENT = #{content}
+		WHERE IDX = #{idx}
+	</update>
 </mapper>

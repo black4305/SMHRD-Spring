@@ -54,7 +54,7 @@
 				</form>
 				<td colspan = "2">
 					<button class = "">돌아가기</button>
-					<button class = "btn btn-primary">수정</button>
+					<button onclick = "location.href = '${cpath}/boardUpdate?idx=${vo.idx}'" class = "btn btn-primary">수정</button>
 					<button onclick = "location.href = '${cpath}/boardDelete?idx=${vo.idx}'" class = "btn btn-danger">삭제</button>
 				</td>
 			</div>

@@ -42,7 +42,7 @@ public class BoardController {
 
 		// 1. DB에서 수집한 데이터 idx와 동일한 idx를 가진 게시글 1개 조회
 		BoardVO vo = mapper.boardSelect(idx);
-
+ 
 		// 2. 조회한 게시글 정보를 model에 담아주기
 		model.addAttribute("vo", vo);
 
@@ -89,5 +89,18 @@ public class BoardController {
 		//  동일하게 작성해야한다!!
 		return "Board";
 		// Web-inf/views/Board.jsp --> viewResolver
+	}
+
+	@GetMapping("/boardUpdate")
+	public String getMethodName(@RequestParam int idx, Model model) {
+		BoardVO vo = mapper.boardSelect(idx);
+		model.addAttribute("vo", vo);
+		return "boardUpdate";
+	}
+	
+	@PostMapping("/boardUpdate")
+	public String boardUpdate(BoardVO vo) {
+		mapper.boardUpdate(vo);
+		return "redirect:/boardlist";
 	}
 }

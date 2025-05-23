@@ -25,4 +25,7 @@ public interface BoardMapper {
 
 	@Delete("DELETE FROM BOARD WHERE idx = #{idx}")
 	public void boardDelete(int idx);
+	
+	// 게시글 수정 메서드
+	public int boardUpdate(BoardVO vo);
 }

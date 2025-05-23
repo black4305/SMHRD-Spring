@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 // lombok : 어노테이션을 이용하여 getter/setter/toString등 작성 가능
 @NoArgsConstructor // 기본생성자(전달인자 x)
 @AllArgsConstructor //모든 필드를 전달인자로 받는 생성자argument : 전달인자 
@@ -20,7 +21,4 @@ public class BoardVO {
 	private String writer;
 	private String content;
 	private Date indate;
-	
-	
-	
 }

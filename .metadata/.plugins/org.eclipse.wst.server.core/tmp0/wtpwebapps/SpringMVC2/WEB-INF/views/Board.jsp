@@ -44,7 +44,7 @@
 					<c:forEach items="${list}" var="b">
 						<tr>
 							<td>${b.idx}</td>
-							<td><a href="/web/boardSelect?idx=${b.idx}">${b.title}</td>
+							<td><a href="${cpath}/boardSelect?idx=${b.idx}">${b.title}</td>
 							<td>${b.writer}</td>
 							<td>${b.indate}</td>
 						</tr>		
