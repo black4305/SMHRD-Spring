@@ -1,0 +1,39 @@
+# Eclipse metadata
+.metadata/
+.settings/
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Maven
+target/
+*/target/
+
+# IDE
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Logs
+*.log
+
+# OS generated files
+*~
+
+# Compiled class files
+*.class
+
+# Package Files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar 

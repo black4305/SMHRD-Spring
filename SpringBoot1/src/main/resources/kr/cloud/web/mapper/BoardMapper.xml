@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.cloud.web.mapper.BoardMapper">
+    <select id="selectAll" resultType="kr.cloud.web.entity.Board">
+        SELECT * FROM BOARD ORDER BY IDX DESC;
+    </select>
+
+    <select id="goBoardContent" resultType="kr.cloud.web.entity.Board">
+        SELECT * FROM BOARD WHERE IDX = #{idx};
+    </select>
+
+    <insert id = "goInsert" parameterType = "kr.cloud.web.entity.Board">
+        INSERT INTO BOARD (TITLE, WRITER, CONTENT, COUNT)
+        VALUES (#{title}, #{writer}, #{content}, 0);
+    </insert>
+</mapper>

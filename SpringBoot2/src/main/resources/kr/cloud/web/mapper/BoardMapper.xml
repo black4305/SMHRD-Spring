@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.cloud.web.mapper.BoardMapper">
+	<select id="selectAll" resultType="kr.cloud.web.entity.Board">
+		SELECT * FROM BOARD ORDER BY IDX DESC;
+	</select>
+	
+	<select id="goBoardContent" resultType="kr.cloud.web.entity.Board">
+		SELECT * FROM BOARD WHERE IDX = #{idx}	
+	</select>
+	
+	<select id="search" parameterType="kr.cloud.web.entity.SearchCriteria" resultType="kr.cloud.web.entity.Board">
+			SELECT * FROM BOARD 
+		<include refid="searchOption"/>
+	</select>
+	<sql id="searchOption">
+		<if test="filter=='작성자'">
+			WHERE WRITER LIKE CONCAT('%', #{searchContent}, '%')
+		</if>
+		
+		<if test="filter=='제목'">
+			WHERE TITLE LIKE CONCAT('%', #{searchContent}, '%')
+		</if>
+		
+		<if test="filter=='내용'">
+			WHERE CONTENT LIKE CONCAT('%', #{searchContent}, '%')
+		</if>
+	</sql>
+	
+	<insert id="goInsert" parameterType="kr.cloud.web.entity.Board">
+		INSERT INTO BOARD(TITLE, WRITER, CONTENT, COUNT, FILE)
+		VALUES(#{title},#{writer}, #{content}, 0, #{file})	
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>
