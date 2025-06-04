@@ -2,6 +2,9 @@
 .metadata/
 .settings/
 
+# Nested Git repositories
+Spring/
+
 # macOS
 .DS_Store
 .DS_Store?

@@ -67,9 +67,10 @@
 					<button onclick="location.href='${cpath}/goInsert'" class="btn btn-success">
 						글 작성하기
 					</button>
-					<button onclick="location.href='${cpath}/goChat'" class="btn btn-success">
+					<button onclick="location.href='${cpath}/goChat'" class="btn btn-info">
 						채팅하기
 					</button>
+					
 					
 				</div>
 			</div>

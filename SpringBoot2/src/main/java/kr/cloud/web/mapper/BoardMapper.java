@@ -22,8 +22,7 @@ public interface BoardMapper {
 	public List<Board> search(SearchCriteria criteria);
 
 	public void goInsert(Board board);
-	
+
 	@Delete("DELETE FROM BOARD WHERE IDX = #{idx}")
 	public void delete(int idx);
-
 }
