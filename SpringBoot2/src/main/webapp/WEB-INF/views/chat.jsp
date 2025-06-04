@@ -94,6 +94,8 @@
     let nickname = document.getElementById("nickname");
     let sendMsg = document.getElementById("sendMsg");
     let chattingRoom = document.getElementById("Chatting");
+    let content = document.getElementById("content");
+    let websocket;
 
     // *1. id가 eCheck인 버튼 클릭 시, id가 nickname인 input태그를 가져와서 그 안의 값 꺼내기
     //     console.log를 통해서 가져온 닉네임 출력
@@ -115,7 +117,7 @@
        // 웹 소캣에서는 ws이다.
        // location.host -> localhost
        let url ="ws://" + location.host + "${cpath}/websocket";
-       let websocket = new WebSocket(url);
+       websocket = new WebSocket(url);
        console.log(websocket);
        
       // 1. 소캣이 열렸을 때, 실행할 함수
@@ -130,10 +132,55 @@
        
        //3. 소캣을 사용해서 데이터 전송할 함수
        websocket.onmessage =function(evt){
-          console.log("연결 메세지 수신");
-          console.log("데이터 확인 >>", evt); 
+         console.log("연결 메세지 수신");
+         console.log("데이터 확인 >> ", evt);
+
+         // 받아온 메시지가 success -> 채팅방 화면에 출력
+         if(evt.data == "success") {
+         // div 태그 속에 데이터 추가
+         chattingRoom.append("=== 채팅방 입장을 환영합니다! ===");
+         }
+         else {
+            // 다른 사람이 보낸 텍스트 데이터를 수신할 때, 실행할 code
+            console.log("다른 사람이 보낸 텍스트 >> " + evt.data);
+
+            // 화면 구성 변환(상단에 디자인 정의된 .my .others 활용)
+
+            // 1. display block 속성을 가지고 있는 div 태그 생성
+            let div = document.createElement("div");
+
+            // 2. div 태그 안 쪽에 evt.data.content만 꺼내와서 글자로 세팅
+            let temp = JSON.parse(evt.data);
+            div.innerText = temp.content;
+
+            // 3. div 태그에 class 속성을 others 부여
+            div.className = "others";
+
+            // 4. chatingRoom에 추가
+            chattingRoom.append(div);
+         }
        };
-    }
+    } // connection 함수 끝
+
+   // 1. 전송 버튼 클릭 시 실행할 함수 생성
+   sendMsg.addEventListener("click", function() {
+
+      // 2. 닉네임, 메시지 내용 가져오기 -> 입력된 값을 가져와서 key, value 값으로 넣어주기
+      let sendData = {
+         nickname : nickname.value,
+         content : content.value
+      }
+      console.log(sendData);
+
+      // json 데이터를 변환 후, websocket을 이용해서 전달!
+      websocket.send(JSON.stringify(sendData));
+
+      let div = document.createElement("div");
+      div.innerText = content.value;
+      div.className = "my";
+      chattingRoom.append(div);
+   });
+
    </script>
 </body>
 </html>

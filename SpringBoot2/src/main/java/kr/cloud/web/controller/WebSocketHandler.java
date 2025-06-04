@@ -12,8 +12,6 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import jakarta.websocket.server.ServerEndpoint;
 
-
-
 @Controller
 @ServerEndpoint("/websocket") // 웹 소켓 사용 시, 요청하면 소캣으로 들어올 url매핑값
 public class WebSocketHandler extends TextWebSocketHandler{
@@ -34,14 +32,6 @@ public class WebSocketHandler extends TextWebSocketHandler{
    //   -> 동시에 여러개의 다중 작업 가능!
    private static ConcurrentHashMap<String,WebSocketSession> clients = new ConcurrentHashMap<>();
    
-   
-   
-   
-   // override : alt shift S
-   // 상속 받은 기능들을 원하는 형식으로 변경(오버라이드)
-   // session : 기존에 사용하던 세션(HttpSession)이랑 다른 세션이다.
-   //   --> client의 고유 세션 키값을 받아온다.
-   // *1. 웹 소캣이 열렸을 때, 실행되는 메서드
    @Override
    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
       logger.info("connection 로그 >>"+ session);
@@ -51,10 +41,28 @@ public class WebSocketHandler extends TextWebSocketHandler{
       // 데이터를 전송하는 방법 : 접속한 사용자 본인에게 메세지 보내기
       session.sendMessage(new TextMessage("success"));
    }
+
    // *2. 웹 소켓이 텍스트 데이터를 전달 받았을 때, 실행되는 메서드
    @Override
    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-      logger.info("handle 로그 >>"+session);
+      logger.info("handle 로그 >>" + session);
+      logger.info("message 확인 >> " + message.getPayload());
+
+      // java 람다식 구조 : method(function)를 간략하게 생성
+      // entryset : map 구조에서 모든 key-value 쌍을 가져와서 한 쌍으로 이뤄진 객체반환
+      clients.entrySet().forEach(data -> {
+         logger.info("받아온 데이터 >> { }" + data);
+
+         if(! data.getValue().getId().equals(session.getId())) {
+            // 받아온 데이터의 id != websocket의 id -> 데이터 전송
+
+            try {
+               data.getValue().sendMessage(message);
+            } catch (Exception e) {
+               e.printStackTrace();
+            }
+         }
+      });
    }
 
    // *3. 웹 소켓이 닫혔을때, 실행되는 메서드
@@ -64,6 +72,4 @@ public class WebSocketHandler extends TextWebSocketHandler{
       // 사용자의 모든 정보가 들어있는 clients 자료 구조에서 해당 사용자 삭제
       clients.remove(session.getId());
    }
-   
-   
 }
