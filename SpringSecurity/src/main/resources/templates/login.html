@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<!-- xml namespace지정 
+	 th -> 타임리프 문법 사용 시에 항상 앞에 붙여줘야한다.
+	 * 타임리프? ( 템플릿 엔진의 한 종류!)
+	   = 정적인 html문서에서 server단에서 받아온 변수들을 꺼내와서
+	      동적인 형태로 보여주게끔 만들어주는 도구
+	      1) 타임리프를 사용하기 위해서 라이브러리 추가
+	      2) html문서 내에서 타임리프 스키마(문법에 대한 정보를 갖는 메타데이터)
+	         로드하기
+	      3)  request영역의 데이터만 가져올 수 있다.
+ -->
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+
+</head>
+<body>
+		<!--  타임리프 사용법
+			1) 태그의 속성을 기준으로 타임리프 사용 가능
+			2) 태그를 통해 텍스트를 보여줄때, 타임리프 문법을 사용-->
+		<!--  
+		<p th:text="${name}">이름</p>
+		<div th:each="n:${list}">
+			<p th:text="${n}"></p>
+		</div> 
+		-->
+	<form class="form-signin" action="login-process" method="post">
+        <h2 class="form-signin-heading text-center mb-5">💚클라우드반💚</h2>
+        <p>
+            <label for="userid" class="sr-only">아이디</label>
+            <input type="text" name="userid" id="userid" class="form-control" placeholder="아이디" autofocus required>
+        </p>
+        <p>
+            <label for="password" class="sr-only">비밀번호</label>
+            <input type="password" name="userpw" id="password"  class="form-control" placeholder="비밀번호" required>
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="loginbtn">로그인</button>
+    </form>
+
+    <form class="form-signin" method="get">
+        <button class="btn btn-lg btn-warning btn-block" type="submit">회원가입하기</button>
+    </form>
+</body>
+</html>
